@@ -10,6 +10,8 @@ const styles = StyleSheet.create({
   textField: {
     fontSize: 15,
     fontWeight: 'normal',
+    height:50,
+    color: Colors.black
   },
   fieldTitle: {
     fontSize: 16,

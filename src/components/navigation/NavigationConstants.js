@@ -3,4 +3,6 @@ export default {
   home: 'Home',
   profile: 'Profile',
   todos: 'Todos',
+  companyLogin: 'Company Login',
+
 };

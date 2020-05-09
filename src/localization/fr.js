@@ -1,8 +1,13 @@
 export default {
+  companyScreen:{
+    connect: 'Se connecter',
+    companyKey: "clé d'entreprise"
+  },
   login: 'Athentification',
   loading: 'Loading',
-  password: 'Password',
+  password: 'Mot de passe',
   email: 'Email',
+  username: "Nom d'utilisateur",
   home: 'Home',
   homeMessage: 'Welcome',
   profile: 'Profile',

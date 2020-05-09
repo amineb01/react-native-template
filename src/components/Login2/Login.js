@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect,useMemo } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import {
   TouchableOpacity,
   ActivityIndicator,
@@ -24,7 +24,9 @@ import settingsSelectors from 'selectors/SettingsSelectors';
 import companySelectors from 'selectors/CompanySelectors';
 
 import strings from 'localization';
-import { login, logout, actionTypes } from 'actions/UserActions';
+import { getTechniciansList } from 'actions/TechniciansActions';
+
+import { login, actionTypes } from 'actions/UserActions';
 import { _changeLanguage } from 'actions/SettingsActions';
 import icon from 'assets/altagem-ok.png';
 import techniciansSelectors from 'selectors/TechniciansSelectors';
@@ -34,7 +36,8 @@ function Login(props) {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [display, setDisplay] = useState(false);
+  const [companyId, setCompanyId] = useState('');
+  const [display, setDisplay] = useState('');
 
 
   const isLoading = useSelector(state => isLoadingSelector([actionTypes.LOGIN], state));
@@ -42,41 +45,32 @@ function Login(props) {
   const { language } = useSelector(state => settingsSelectors(state));
   const company = useSelector(state => companySelectors(state));
   const techniciansList = useSelector(state => techniciansSelectors(state));
-  const [techList, setTechList] = useState(techniciansList);
-
 
   const [lng, setLng] = useState(language || 'fr');
 
-  const usernameChanged = useCallback(value => { setUsername(value); setDisplay(true)}, [setUsername]);
-  const passwordChanged = useCallback(value => setPassword(value), [setPassword]);
+
+
   const loginUser = useCallback(() => (
-    dispatch(login('bellarejmohamed-amine_5832', password, company.id ))), [ dispatch, username, password]);
-    const logoutUser = useCallback(() => (
-      dispatch(logout( ))), [ dispatch]);
-  const enVersion = useCallback(value => setLng('en'), [setLng]);
-  const frVersion = useCallback(() => setLng('fr'), [setLng]);
+    dispatch(login(username, password))), [username, password, dispatch]);
 
-  const handelUpdateItem = useCallback(value => {
-    console.log(value)
-    setDisplay(false)
-    setUsername(value.first_name+' '+value.last_name)
-  }, []);
-
-  const technicians = useMemo(() => {   return techList.map(obj=> ({ ...obj, formatedName:  obj.first_name+' '+obj.last_name  }))  }, [techList]);
-
-
-  // const usernameChanged = useCallback(value => setUsername(value), [setUsername]);
-  // const usernameChanged = useCallback(value => setUsername(value), [setUsername]);
-
-  //
-  // useEffect(() => {
-  //    setTechList(techList)
-  // },[techList])
+  const getTechnicians = useCallback(() => (
+    dispatch(getTechniciansList( company.id ))), [ dispatch]);
 
   useEffect(() => {
     dispatch(_changeLanguage(lng))
     strings.setLanguage(lng);
   },[lng]);
+
+  useEffect(() => {
+      if (company)  getTechnicians( )
+  },[]);
+
+  const passwordChanged = useCallback(value => setPassword(value), []);
+  const usernameChanged = useCallback(value => setUsername(value), []);
+  const updateItem = value => {
+    console.log(value)
+    setUsername(value)
+  }
 
   const { navigation } = props;
   navigation.setOptions({ headerShown: false });
@@ -90,26 +84,27 @@ function Login(props) {
       <Text>{lng}</Text>
       <View style={styles.btnContainer}>
         <Button style={styles.button}
-          onPress={frVersion}
+          onPress={()=>setLng('fr')}
           title='francais'
         />
         <Button style={styles.button}
-          onPress={enVersion}
+          onPress={()=>setLng('en')}
           title='anglais'
         />
       </View>
       <View style={styles.formContainer} >
-
         <Text style={TextStyles.fieldTitle}>
           {strings.username}
         </Text>
+        {techniciansList &&
           <TextFieldAutoComplete
-            displayList={display}
-            updateItem={handelUpdateItem}
             value={username}
-            data={technicians}
             textChanged={usernameChanged}
+            data={techniciansList}
+            updateItem={updateItem}
+
           />
+        }
         <Text style={TextStyles.fieldTitle}>
           {strings.password}
         </Text>
@@ -119,16 +114,12 @@ function Login(props) {
           onChangeText={passwordChanged}
           secureTextEntry
         />
-        <View style={{ width: '80%' }}>
-          <ErrorView errors={errors}  />
-        </View>
-
+        <ErrorView errors={errors} />
         <Button
-          title={isLoading ? strings.loading : strings.login}
           onPress={loginUser}
+          title={isLoading ? strings.loading : strings.login}
         />
       </View>
-
     </View>
   );
 }
@@ -137,4 +128,4 @@ Login.propTypes = {
   navigation: PropTypes.object.isRequired,
 };
 
-export default React.memo(Login);
+export default Login;

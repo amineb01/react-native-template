@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
   formContainer: {
     alignSelf: 'stretch',
     justifyContent: 'center',
+    alignItems: 'flex-start',
     marginHorizontal: 40,
     padding: 20,
     width: '100%',
@@ -25,12 +26,6 @@ const styles = StyleSheet.create({
   altagemLogo: {
     width:"80%",
     height: '20%'
-  },
-  textError: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Colors.red
   },
   button: {
     backgroundColor: Colors.red,

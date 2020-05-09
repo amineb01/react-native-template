@@ -26,14 +26,24 @@ const logoutRequest = () => ({
   type: actionTypes.LOGOUT,
 });
 
-export const login = (email, password) => async (dispatch) => {
+export const login = (login, password, company_id) => async (dispatch) => {
   dispatch(loginRequest());
-  try {
-    const user = await UserController.login(email, password);
-    dispatch(loginSuccess(user));
-  } catch (error) {
-    dispatch(loginError(error.message));
-  }
+    UserController.login(login, password, company_id)
+      .then((result) => {
+        if (result && result.data.status == "success" && result.data.message == "Logged in" ){
+          dispatch(loginSuccess(result.data));
+        }else{
+          dispatch("you're already log in");
+        }
+      })
+      .catch((error) => {
+        if (error.response) {
+          dispatch(loginError(error.response.data.message));
+        }else{
+          dispatch(loginError("autre erreur"));
+        }
+      });
+
 };
 
 export const logout = () => (dispatch) => {

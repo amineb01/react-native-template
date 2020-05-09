@@ -14,7 +14,13 @@ const userReducer = (state = initialState, action) => {
     case actionTypes.LOGIN_SUCCESS:
       return {
         ...state,
-        user: action.user,
+        user: {...action.user, connect_on: Math.floor(Date.now() / 1000) },
+        error: null,
+      };
+    case actionTypes.LOGIN_ERROR:
+      return {
+        ...state,
+        error: action.error,
       };
     case actionTypes.LOGOUT:
       return initialState;
@@ -22,5 +28,6 @@ const userReducer = (state = initialState, action) => {
       return state;
   }
 };
+
 
 export default userReducer;

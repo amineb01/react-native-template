@@ -6,7 +6,6 @@ const initialState = {
 };
 
 const todosReducer = (state = initialState, action) => {
-  console.log(action)
   switch (action.type) {
     case actionTypes.TODOS_REQUEST:
       return {

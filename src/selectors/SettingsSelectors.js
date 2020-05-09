@@ -1,1 +1,1 @@
-export default state => state.settings.language;
+export default state => state.settings;

@@ -1,8 +1,13 @@
 export default {
+  companyScreen:{
+    connect: 'Connect',
+    companyKey: "company key"
+  },
   login: 'Login',
   loading: 'Loading',
   password: 'Password',
   email: 'Email',
+  username: 'Username',
   home: 'Home',
   homeMessage: 'Welcome',
   profile: 'Profile',

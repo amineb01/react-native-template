@@ -10,28 +10,31 @@ import Colors from 'helpers/Colors';
 
 const styles = StyleSheet.create({
   button: {
-    alignSelf: 'stretch',
-    alignItems: 'center',
-    borderColor: Colors.primary,
-    borderWidth: 1,
-    marginTop: 10,
-    padding: 5,
-    borderRadius: 5,
+    width:"80%",
+    backgroundColor:Colors.secondary,
+    borderRadius:25,
+    height:50,
+    alignItems:"center",
+    justifyContent:"center",
+    marginTop:40,
+    marginBottom:10
   },
 });
 
-const Button = props => (
-  <TouchableOpacity
+const Button = props => {
+  console.log('btnnnn')
+return(  <TouchableOpacity
     {...props}
     style={[styles.button, props.style]}
   >
     <Text
-      style={[TextStyles.fieldTitle, props.textStyle]}
+      style={[TextStyles.lightTitle, props.textStyle]}
     >
       {props.title}
     </Text>
   </TouchableOpacity>
 );
+}
 
 Button.propTypes = {
   style: PropTypes.object,
@@ -44,5 +47,4 @@ Button.defaultProps = {
   textStyle: null,
   title: '',
 };
-
-export default Button;
+export default React.memo(Button);

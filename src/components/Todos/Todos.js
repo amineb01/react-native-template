@@ -20,6 +20,7 @@ import { getTodosList, login, actionTypes } from 'actions/TodosActions';
 const Todos = () => {
   const todosList = useSelector(state => getTodos(state));
   const dispatch = useDispatch();
+  
   useEffect(() => {
   const todosFunc =   () => dispatch(getTodosList())
   todosFunc()

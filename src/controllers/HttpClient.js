@@ -1,13 +1,14 @@
 import axios from 'axios';
-import { API_URL } from 'react-native-dotenv';
+import { API_URL_INFO, API_URL_IT } from 'react-native-dotenv';
 
 /*
   Base client config for your application.
   Here you can define your base url, headers,
   timeouts and middleware used for each request.
 */
+
 const client = axios.create({
-  baseURL: API_URL,
+  baseURL: API_URL_IT,
   timeout: 100000,
   headers: { 'content-type': 'application/json' },
 });

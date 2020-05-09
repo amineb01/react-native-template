@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import rootReducer from './RootReducer';
 
 const persistConfig = {
-  key: 'roott', //if change it we delete our saved data
+  key: 'rootn13', //if change it we delete our saved data
   storage: AsyncStorage,
   blacklist: ['loading', 'error'],
 };

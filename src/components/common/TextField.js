@@ -10,11 +10,17 @@ import Colors from 'helpers/Colors';
 
 const styles = StyleSheet.create({
   container: {
-    alignSelf: 'stretch',
-    marginVertical: 10,
+    width:"80%",
+    backgroundColor: Colors.grayLight,
+    borderRadius:15,
+    height:50,
+    marginBottom:20,
+    justifyContent:"center",
+    padding:20,
+
   },
   line: {
-    backgroundColor: Colors.gray,
+    backgroundColor: Colors.white,
     marginTop: 2,
     height: 1,
     flexDirection: 'column',
@@ -25,16 +31,17 @@ const styles = StyleSheet.create({
   },
 });
 
-const TextField = props => (
-  <View style={styles.container}>
+const TextField = props => {
+  console.log(props)
+  return (<View style={styles.container}>
     <TextInput
       {...props}
       style={[TextStyles.textField, styles.field, props.style]}
       underlineColorAndroid="transparent"
     />
     <View style={styles.line} />
-  </View>
-);
+  </View>)
+};
 
 TextField.propTypes = {
   style: PropTypes.object,
@@ -44,4 +51,4 @@ TextField.defaultProps = {
   style: null,
 };
 
-export default TextField;
+export default React.memo(TextField);

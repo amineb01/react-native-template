@@ -8,13 +8,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  formContainer: {
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    marginHorizontal: 40,
-    padding: 20,
-    width: '100%',
+  altagemLogo: {
+    width:"80%",
+    height: '40%'
   },
+
   btnContainer: {
     alignSelf: 'stretch',
     alignItems: 'center',
@@ -22,18 +20,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row'
   },
-  altagemLogo: {
-    width:"80%",
-    height: '20%'
-  },
-  textError: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Colors.red
-  },
   button: {
-    backgroundColor: Colors.red,
+    backgroundColor: Colors.gray,
     width: '40%',
     height: 40
   }
